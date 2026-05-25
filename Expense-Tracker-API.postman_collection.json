@@ -1,0 +1,78 @@
+{
+  "info": {
+    "name": "Expense Tracker API",
+    "description": "RESTful API for managing expenses",
+    "version": "1.0.0"
+  },
+  "item": [
+    {
+      "name": "Get All Expenses",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8080/api/expenses"
+      }
+    },
+    {
+      "name": "Get Expense by ID",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8080/api/expenses/1"
+      }
+    },
+    {
+      "name": "Create Expense",
+      "request": {
+        "method": "POST",
+        "url": "http://localhost:8080/api/expenses",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"category\": \"Food\",\n  \"amount\": 25.50,\n  \"description\": \"Dinner\",\n  \"date\": \"2026-05-25T19:00:00\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Update Expense",
+      "request": {
+        "method": "PUT",
+        "url": "http://localhost:8080/api/expenses/1",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"category\": \"Food\",\n  \"amount\": 30.00,\n  \"description\": \"Lunch updated\",\n  \"date\": \"2026-05-25T12:00:00\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Delete Expense",
+      "request": {
+        "method": "DELETE",
+        "url": "http://localhost:8080/api/expenses/1"
+      }
+    },
+    {
+      "name": "Get Expenses by Category",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8080/api/expenses/category/Food"
+      }
+    },
+    {
+      "name": "Get Total by Category",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8080/api/expenses/total/Food"
+      }
+    }
+  ]
+}
