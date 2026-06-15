@@ -1,147 +1,118 @@
-# 💰 Expense Tracker API - Spring Boot
+# ExpenseTracker API
 
-![Java](https://img.shields.io/badge/Java-11+-orange?style=flat-square&logo=java)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.7.15-green?style=flat-square&logo=spring)
-![MySQL](https://img.shields.io/badge/MySQL-5.7+-blue?style=flat-square&logo=mysql)
-![Maven](https://img.shields.io/badge/Maven-3.6+-red?style=flat-square&logo=apache-maven)
-![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
+**ExpenseTracker API** is a modern RESTful API for tracking personal and business expenses. Built with Spring Boot and SQL Server, it provides comprehensive expense management with categorization, filtering, and summary statistics.
 
-A professional-grade RESTful API for managing personal and business expenses. Built with Spring Boot 2.7, it provides comprehensive expense tracking with real-time analytics and category-based organization.
+## 🎯 Features
 
-## ✨ Features
+- 📊 **Expense Tracking** - Create, read, update, and delete expenses
+- 💰 **Amount Tracking** - Track expense amounts with decimal precision
+- 🏷️ **Categories** - Organize expenses by category (Food, Transport, Entertainment, etc.)
+- 🔍 **Filtering** - Filter expenses by category or date range
+- 📈 **Statistics** - Get expense summaries and totals by category
+- 📅 **Date Tracking** - Track when expenses were made
+- ✅ **Validation** - Input validation with helpful error messages
+- 🔒 **SQL Server** - Enterprise-grade SQL Server database
+- 📝 **RESTful Design** - Proper HTTP methods and status codes
+- 🧪 **Tested** - Unit tests with JUnit 5 and Mockito
 
-### Core Functionality
-- ✅ **CRUD Operations** - Create, read, update, delete expenses
-- 📊 **Expense Analytics** - Get statistics and summaries
-- 🏷️ **Category Management** - Organize expenses by category
-- 📈 **Total Calculations** - Calculate totals by category
-- 🔍 **Filtering** - Filter expenses by date range and category
-- 📄 **Pagination** - Efficient data retrieval for large datasets
+## 📋 Tech Stack
 
-### Technical Features
-- 🛡️ **Global Exception Handling** - Comprehensive error responses
-- ✔️ **Input Validation** - Automatic validation with Bean Validation
-- 📝 **Comprehensive Logging** - Track all operations
-- 🔀 **CORS Enabled** - Cross-origin requests supported
-- 📄 **Postman Collection** - Pre-configured API testing
-- 💾 **JPA/Hibernate ORM** - Database abstraction layer
-
-## 🛠️ Tech Stack
-
-| Component | Technology |
-|-----------|-----------|
-| **Framework** | Spring Boot 2.7.15 |
-| **Language** | Java 11+ |
-| **Database** | MySQL 5.7+ |
-| **ORM** | JPA/Hibernate |
-| **Build Tool** | Maven 3.6+ |
-| **Testing** | JUnit 5 (ready to implement) |
-| **API Documentation** | Postman Collection |
-
-## 📋 Prerequisites
-
-- **Java 11** or higher
-- **Maven 3.6** or higher
-- **MySQL 5.7** or higher
-- **Postman** (for API testing)
+| Component | Technology | Version |
+|-----------|-----------|---------|
+| Framework | Spring Boot | 2.7.15 |
+| Language | Java | 11+ |
+| Database | SQL Server | 2016+ |
+| ORM | Hibernate/JPA | - |
+| Testing | JUnit 5 | - |
+| Build Tool | Maven | 3.6+ |
 
 ## 🚀 Quick Start
 
-### 1. Clone Repository
+### Prerequisites
+
+- Java 11 or higher
+- Maven 3.6+
+- SQL Server 2016 or later (or SQL Server Express)
+
+### Installation
+
+#### 1. Database Setup
+
+**Option A: Using SQL Server Management Studio (SSMS)**
+- Open SSMS and connect to your SQL Server
+- Open a new query window
+- Copy and paste contents of `database_sqlserver.sql`
+- Execute the script
+
+**Option B: Using Command Line**
 ```bash
-git clone https://github.com/Rithi2024/expense-api-springboot.git
-cd expense-api-springboot
+sqlcmd -S localhost -U sa -P YourPassword123 -i database_sqlserver.sql
 ```
 
-### 2. Database Setup
+#### 2. Configure Database Connection
 
-Create database and tables:
-```bash
-mysql -u root -p < database.sql
+Set environment variables or create `.env` file:
+
+**Windows (Command Prompt)**
+```cmd
+set EXPENSE_DB_URL=jdbc:sqlserver://localhost:1433;databaseName=ExpenseDB
+set EXPENSE_DB_USERNAME=sa
+set EXPENSE_DB_PASSWORD=YourPassword123
 ```
 
-When prompted, enter your MySQL password.
-
-### 3. Configure Application
-
-Edit `application.properties`:
-```properties
-spring.datasource.username=root
-spring.datasource.password=your_password
-spring.datasource.url=jdbc:mysql://localhost:3306/expense_db?useSSL=false&serverTimezone=UTC
+**Windows (PowerShell)**
+```powershell
+$env:EXPENSE_DB_URL = "jdbc:sqlserver://localhost:1433;databaseName=ExpenseDB"
+$env:EXPENSE_DB_USERNAME = "sa"
+$env:EXPENSE_DB_PASSWORD = "YourPassword123"
 ```
 
-### 4. Build Application
+**Linux/Mac**
 ```bash
+export EXPENSE_DB_URL=jdbc:sqlserver://localhost:1433;databaseName=ExpenseDB
+export EXPENSE_DB_USERNAME=sa
+export EXPENSE_DB_PASSWORD=YourPassword123
+```
+
+#### 3. Build and Run
+
+```bash
+# Build the project
 mvn clean build
-```
 
-### 5. Run Application
-```bash
+# Run tests
+mvn test
+
+# Run the application
 mvn spring-boot:run
 ```
 
-Server starts at `http://localhost:8080`
+The API will start at [http://localhost:8080](http://localhost:8080)
 
-## 📁 Project Structure
-
-```
-expense-api-springboot/
-├── src/main/java/com/example/
-│   ├── ExpenseTrackerApplication.java      # Application entry point
-│   ├── controller/
-│   │   └── ExpenseController.java          # REST endpoints
-│   ├── model/
-│   │   └── Expense.java                    # JPA entity
-│   ├── repository/
-│   │   └── ExpenseRepository.java          # Data access layer
-│   ├── service/
-│   │   └── ExpenseService.java             # Business logic
-│   ├── dto/
-│   │   └── ExpenseDTO.java                 # Data transfer object
-│   └── exception/
-│       ├── ResourceNotFoundException.java   # Custom exception
-│       └── GlobalExceptionHandler.java     # Exception handler
-├── src/main/resources/
-│   └── application.properties              # Configuration
-├── pom.xml                                 # Maven dependencies
-├── Expense-Tracker-API.postman_collection.json
-└── database.sql
-```
-
-## 📡 API Endpoints
+## 📖 API Endpoints
 
 ### Get All Expenses
 ```http
 GET /api/expenses
 ```
 
-**Response:**
+Response:
 ```json
-{
-  "totalExpenses": 5,
-  "page": 0,
-  "size": 10,
-  "totalAmount": 150.50,
-  "data": [...]
-}
+[
+  {
+    "id": 1,
+    "category": "Food",
+    "amount": 25.50,
+    "description": "Lunch at restaurant",
+    "date": "2024-01-15T12:30:00",
+    "createdAt": "2024-01-15T12:30:00"
+  }
+]
 ```
 
 ### Get Expense by ID
 ```http
 GET /api/expenses/{id}
-```
-
-**Response:**
-```json
-{
-  "id": 1,
-  "category": "Food",
-  "amount": 25.50,
-  "description": "Lunch",
-  "date": "2026-05-25T12:00:00",
-  "createdAt": "2026-05-25T10:00:00"
-}
 ```
 
 ### Create Expense
@@ -153,16 +124,7 @@ Content-Type: application/json
   "category": "Food",
   "amount": 25.50,
   "description": "Lunch at restaurant",
-  "date": "2026-05-25T12:00:00"
-}
-```
-
-**Response:** 201 Created
-```json
-{
-  "message": "Expense created successfully",
-  "data": {...},
-  "timestamp": "2026-05-25T10:00:00"
+  "date": "2024-01-15T12:30:00"
 }
 ```
 
@@ -174,8 +136,8 @@ Content-Type: application/json
 {
   "category": "Food",
   "amount": 30.00,
-  "description": "Updated lunch",
-  "date": "2026-05-25T12:00:00"
+  "description": "Dinner at restaurant",
+  "date": "2024-01-15T19:00:00"
 }
 ```
 
@@ -184,26 +146,14 @@ Content-Type: application/json
 DELETE /api/expenses/{id}
 ```
 
-**Response:**
-```json
-{
-  "message": "Expense deleted successfully"
-}
-```
-
 ### Get Expenses by Category
 ```http
 GET /api/expenses/category/{category}
 ```
 
-**Response:**
-```json
-{
-  "category": "Food",
-  "count": 5,
-  "total": 125.50,
-  "data": [...]
-}
+Example:
+```http
+GET /api/expenses/category/Food
 ```
 
 ### Get Total by Category
@@ -211,261 +161,170 @@ GET /api/expenses/category/{category}
 GET /api/expenses/total/{category}
 ```
 
-**Response:**
-```json
-{
-  "category": "Food",
-  "total": 125.50,
-  "expenseCount": 5
-}
-```
-
-### Get Expense Statistics
+### Get Statistics Summary
 ```http
 GET /api/expenses/stats/summary
 ```
 
-**Response:**
+Response:
 ```json
 {
-  "totalExpenses": 15,
-  "totalAmount": 500.00,
-  "averageExpense": 33.33,
-  "highestExpense": 100.00
+  "totalExpenses": 1250.00,
+  "averageExpense": 156.25,
+  "categorySummary": {
+    "Food": 250.00,
+    "Transport": 150.00,
+    "Entertainment": 200.00,
+    "Utilities": 650.00
+  }
 }
 ```
 
-## 🧪 Testing with Postman
+## 📁 Project Structure
 
-### Import Collection
-1. Open Postman
-2. Click "Import"
-3. Select `Expense-Tracker-API.postman_collection.json`
-4. All endpoints are ready to test!
+```
+ExpenseTracker-API/
+├── src/main/java/com/example/
+│   ├── controller/       # REST controllers
+│   ├── model/           # JPA entities
+│   ├── repository/      # Data access layer
+│   ├── service/         # Business logic
+│   ├── dto/             # Data transfer objects
+│   ├── exception/       # Custom exceptions
+│   └── ExpenseTrackerApplication.java
+├── src/main/resources/
+│   └── application.properties
+├── pom.xml              # Maven configuration
+├── database_sqlserver.sql  # SQL Server schema
+└── README.md
+```
 
-### Manual Testing with cURL
+## 🧪 Testing
 
+### Run Tests
 ```bash
-# Create expense
-curl -X POST http://localhost:8080/api/expenses \
-  -H "Content-Type: application/json" \
-  -d '{
-    "category":"Food",
-    "amount":25.50,
-    "description":"Lunch",
-    "date":"2026-05-25T12:00:00"
-  }'
-
-# Get all expenses
-curl http://localhost:8080/api/expenses
-
-# Get by ID
-curl http://localhost:8080/api/expenses/1
-
-# Get by category
-curl http://localhost:8080/api/expenses/category/Food
-
-# Get statistics
-curl http://localhost:8080/api/expenses/stats/summary
+mvn test
 ```
 
-## 🗄️ Database Schema
-
-### Expenses Table
-```sql
-CREATE TABLE expenses (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    category VARCHAR(50) NOT NULL,
-    amount DECIMAL(10, 2) NOT NULL,
-    description VARCHAR(255),
-    date DATETIME NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    INDEX (category),
-    INDEX (date)
-);
-```
-
-## 🔧 Configuration
-
-### Application Properties
-```properties
-# Server
-server.port=8080
-spring.application.name=Expense Tracker API
-
-# Database
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-spring.jpa.properties.hibernate.format_sql=true
-
-# Logging
-logging.level.root=INFO
-logging.level.com.example=DEBUG
-```
-
-## 📝 Entity Model
-
-```java
-@Entity
-@Table(name = "expenses")
-public class Expense {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
-    @Column(nullable = false)
-    private String category;
-    
-    @Column(nullable = false)
-    private Double amount;
-    
-    private String description;
-    
-    @Column(nullable = false)
-    private LocalDateTime date;
-    
-    private LocalDateTime createdAt;
-}
-```
-
-## 🚀 Deployment
-
-### Deploy to Heroku
-```bash
-# Create Heroku app
-heroku create your-app-name
-
-# Deploy
-git push heroku main
-
-# Check logs
-heroku logs --tail
-```
-
-### Deploy to AWS
-1. Package as JAR: `mvn clean package`
-2. Upload to AWS Elastic Beanstalk
-3. Configure RDS MySQL database
-4. Deploy application
-
-### Deploy with Docker
-```dockerfile
-FROM openjdk:11-jre-slim
-COPY target/expense-api.jar app.jar
-ENTRYPOINT ["java", "-jar", "app.jar"]
-```
-
-```bash
-docker build -t expense-api .
-docker run -p 8080:8080 expense-api
-```
-
-## 🔐 Security Considerations
-
-### Production Checklist
-- ✅ Use environment variables for sensitive config
-- ✅ Enable HTTPS/SSL
-- ✅ Implement authentication (Spring Security)
-- ✅ Add rate limiting
-- ✅ Use prepared statements (default with JPA)
-- ✅ Input validation on all endpoints
-- ✅ CORS restrictions
-
-### Add Spring Security
-```xml
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-security</artifactId>
-</dependency>
-```
-
-## 🧩 Future Enhancements
-
-- [ ] User authentication
-- [ ] User-specific expenses
-- [ ] Budget alerts
-- [ ] CSV export functionality
-- [ ] Monthly/yearly reports
-- [ ] Recurring expenses
-- [ ] Multiple currencies
-- [ ] Email notifications
-- [ ] Swagger/OpenAPI documentation
-- [ ] Unit tests with JUnit
-- [ ] Integration tests
-- [ ] Performance metrics
+### Test Coverage
+The project includes unit tests for:
+- Expense model validation
+- Service layer logic
+- Repository queries
+- Controller endpoints
 
 ## 🐛 Troubleshooting
 
 | Issue | Solution |
 |-------|----------|
-| MySQL connection failed | Verify database credentials in `application.properties` |
-| Port 8080 already in use | Change `server.port` or kill process |
-| Build fails | Run `mvn clean install` |
-| Table not found | Ensure `database.sql` was imported |
-| API returns 500 error | Check application logs for details |
+| **Cannot connect to database** | Verify SQL Server is running and credentials are correct |
+| **Port 8080 already in use** | Change port: `mvn spring-boot:run -Dspring-boot.run.arguments="--server.port=8081"` |
+| **Build fails with JDBC driver** | Run `mvn clean install` to download dependencies |
+| **Database table not created** | Ensure `spring.jpa.hibernate.ddl-auto=update` is set |
+| **Tests failing** | Check if SQL Server is running and test database is accessible |
 
-## 📊 Performance Optimization
+## 📝 Environment Variables
 
-- ✅ Database indexing on category and date
-- ✅ Pagination for large datasets
-- ✅ Query optimization with JPA
-- ✅ Connection pooling
-- ✅ Lazy loading for relationships
-
-## 🔗 Useful Resources
-
-- [Spring Boot Documentation](https://spring.io/projects/spring-boot)
-- [JPA/Hibernate Guide](https://hibernate.org/orm/)
-- [MySQL Documentation](https://dev.mysql.com/doc/)
-- [RESTful API Best Practices](https://restfulapi.net/)
-- [Java Tutorials](https://docs.oracle.com/en/java/)
-
-## 📝 Git Workflow
-
-```bash
-# Create feature branch
-git checkout -b feature/add-reports
-
-# Make changes
-git add .
-git commit -m "Add expense reports"
-
-# Push to GitHub
-git push origin feature/add-reports
+```
+EXPENSE_DB_URL           # SQL Server connection URL
+EXPENSE_DB_USERNAME      # Database user (default: sa)
+EXPENSE_DB_PASSWORD      # Database password
+PORT                     # Server port (default: 8080)
 ```
 
-## 🤝 Contributing
+## 🔐 Security Considerations
 
-Contributions welcome!
+- Use HTTPS in production
+- Use strong database passwords
+- Don't commit credentials to version control
+- Use environment variables for sensitive data
+- Implement authentication/authorization for production
+- Add rate limiting for API endpoints
+- Validate all input data
+- Use SQL prepared statements (automatic with JPA)
 
-1. Fork repository
-2. Create feature branch
-3. Make changes
-4. Write tests
-5. Submit Pull Request
+## 📊 Database Schema
+
+### expenses table
+- `id` - Primary key (auto-incrementing)
+- `category` - Expense category
+- `amount` - Expense amount (decimal)
+- `description` - Expense description
+- `date` - When the expense occurred
+- `created_at` - Record creation timestamp
+
+## 🚀 Production Deployment
+
+### Docker Deployment
+
+Create a `Dockerfile`:
+```dockerfile
+FROM openjdk:11-slim
+COPY target/expense-tracker-api-1.0.0.jar app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
+```
+
+Build and run:
+```bash
+mvn clean package
+docker build -t expense-tracker-api .
+docker run -e EXPENSE_DB_URL=... -p 8080:8080 expense-tracker-api
+```
+
+### Cloud Deployment (Azure, AWS, etc.)
+
+1. Build application: `mvn clean package`
+2. Deploy JAR to cloud platform
+3. Configure environment variables for SQL Server connection
+4. Set up SSL/TLS certificates
+5. Configure firewall rules
 
 ## 📄 License
 
-MIT License - See LICENSE file
-
-## 🙏 Acknowledgments
-
-- Built with Spring Boot
-- Powered by MySQL
-- Inspired by financial tracking applications
+MIT - Feel free to use this project for personal or commercial purposes.
 
 ## 📞 Support
 
-For questions or issues:
-- Open GitHub issue
-- Check documentation
-- Review sample data
+For issues and questions, please refer to the troubleshooting section above.
 
 ---
 
-**Start tracking expenses efficiently! 💰**
+**Track Your Expenses Efficiently! 💰**
+```
 
-Last Updated: May 2026
+Create request example:
 
+```json
+{
+  "category": "Food",
+  "amount": 25.50,
+  "description": "Lunch",
+  "date": "2026-05-25T12:00:00"
+}
+```
+
+## Project Files
+
+```text
+3-expense-api-springboot/
+├── src/main/java/com/example/
+├── src/main/resources/application.properties
+├── src/test/java/com/example/service/ExpenseServiceTest.java
+├── database.sql
+├── Expense-Tracker-API.postman_collection.json
+├── pom.xml
+└── README.md
+```
+
+## Quality Checks
+
+```bash
+mvn clean test
+```
+
+## Notes
+
+- Pagination now uses `PageRequest` instead of returning the full table.
+- The controller delegates business logic to `ExpenseService`.
+- Validation errors return field-level HTTP 400 responses.
+- Runtime database settings live in `src/main/resources/application.properties`.
